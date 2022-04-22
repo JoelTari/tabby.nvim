@@ -7,7 +7,7 @@ local util = require('tabby.util')
 local tabby = {}
 
 ---@type nil|TabbyConfig
-local tabby_opt = nil
+local tabby_opt = config.defaults
 
 ---@param cfg? TabbyConfig
 function tabby.setup(cfg)
@@ -43,6 +43,7 @@ end
 
 function tabby.update()
   filename.flush_unique_name_cache()
+  -- vim.notify(tabby_opt,1,{})
   if tabby_opt.components ~= nil then
     local components = tabby_opt.components()
     return table.concat(vim.tbl_map(component.render, components), '')
